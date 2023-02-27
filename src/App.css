@@ -1,0 +1,27 @@
+:root {
+  --white: #fff;
+  --charcoal: #1c1c1c;
+  --purple: #680adc;
+}
+
+.App-header {
+  background-color: var(--charcoal);
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: left;
+  font-size: calc(10px + 2vmin);
+  color: var(--white);
+  padding: 10px;
+}
+
+.App-form {
+  color: var(--charcoal);
+  padding: 10px;
+  min-height: 100%
+}
+
+.App-comments-field {
+  width: 50%;
+}
+
