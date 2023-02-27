@@ -13,4 +13,6 @@ The random user API provides a large amount of personal information. Some is sen
 
 Typically, FE best practices would dictate that some accessibility features be made available. I am not very experienced in working with aria-labels and the like, but it's an area where I'd like to get more experience. I timeboxed my effort for this takehome assignment and determined that accessibility support was just outside of my timebox.
 
+Emotion is included by default with Material UI for styling and I saw no compelling reason to change that.
+
 
