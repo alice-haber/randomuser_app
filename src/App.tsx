@@ -9,13 +9,36 @@ const onSiteIQPurple = '#680adc'
 
 function App() {
   const [user, setUser] = React.useState<relevantUserFields>(null)
+  const [approveHistory, setApproveHistory] = React.useState<Array<any>>()
 
-  //const resetUser = setUser(null)
+  const resetUser = () => setUser(null)
 
   React.useEffect(() => {
     if (!user) {
       getUser()
         .then(setUser)}}, [user])
+
+  React.useEffect(() => {
+    const histString = localStorage.getItem('approveHistory')
+    //Case where it's a string containing undefined which does not JSON.parse correctly
+    const hist = (!histString || histString === 'undefined')
+      ? []
+      : JSON.parse(histString)
+    setApproveHistory(hist)
+  }, [])
+
+  const handleCandidate = (action: 'Approve' | 'Reject') => () => {
+
+    const newEntry = {message: '', user, action}
+    const newApproveHistory = approveHistory
+      ? approveHistory.concat(newEntry)
+      : [newEntry]
+
+    setApproveHistory(newApproveHistory)
+    localStorage.setItem('approveHistory', JSON.stringify(newApproveHistory))
+
+    resetUser()
+  }
 
   return (
     <div className="App">
@@ -48,15 +71,16 @@ function App() {
                   backgroundColor: onSiteIQWhite,
                   color: onSiteIQPurple,
                   borderColor: onSiteIQPurple
-                }}>Reject</Button>
+                }} onClick={handleCandidate('Reject')}>Reject</Button>
               </Grid>
               <Grid item xs={3}>
                 <Button variant='contained' sx={{
                   color: onSiteIQWhite,
                   backgroundColor: onSiteIQPurple
-                }}>Approve</Button>
+                }} onClick={handleCandidate('Approve')}>Approve</Button>
               </Grid>
             </Grid>
+            {JSON.stringify(approveHistory)}
           </form>
         : <p>Loading</p>}
     </div>
