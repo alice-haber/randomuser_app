@@ -4,6 +4,9 @@ import { getUser, relevantUserFields } from './getRandomUserAPI';
 import Grid from '@mui/material/Grid'
 import { Button, Divider, TextField } from '@mui/material';
 
+const onSiteIQWhite = '#fff'
+const onSiteIQPurple = '#680adc'
+
 function App() {
   const [user, setUser] = React.useState<relevantUserFields>(null)
 
@@ -41,10 +44,17 @@ function App() {
               <Grid item xs={3} sm={7}><TextField multiline className="App-comments-field" /></Grid>
               <Grid item xs={4} sm={8}><Divider /></Grid>
               <Grid item xs={1}>
-                <Button variant='outlined'>Reject</Button>
+                <Button variant='outlined' sx={{
+                  backgroundColor: onSiteIQWhite,
+                  color: onSiteIQPurple,
+                  borderColor: onSiteIQPurple
+                }}>Reject</Button>
               </Grid>
               <Grid item xs={3}>
-                <Button variant='contained'>Approve</Button>
+                <Button variant='contained' sx={{
+                  color: onSiteIQWhite,
+                  backgroundColor: onSiteIQPurple
+                }}>Approve</Button>
               </Grid>
             </Grid>
           </form>
