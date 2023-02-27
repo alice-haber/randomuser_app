@@ -15,4 +15,4 @@ Typically, FE best practices would dictate that some accessibility features be m
 
 Emotion is included by default with Material UI for styling and I saw no compelling reason to change that.
 
-
+When executing the "Undo" action on historical candidate action, I felt it made sense to populate the form with that candidate's information again so that the hiring manager can make a new decision on the candidate, write a new comment, etc. I determined this was out of timebox scope, but this is the direction I'd likely suggest to Product if I were working on this software in the real world.
