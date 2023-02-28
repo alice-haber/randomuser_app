@@ -96,7 +96,7 @@ function App() {
     {
       field: 'message',
       headerName: 'Message',
-      width: 300,
+      width: 500,
       editable: false,
     }
       ]
