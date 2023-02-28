@@ -13,11 +13,15 @@ const onSiteIQCharcoal = '#1c1c1c'
 
 function App() {
   const [user, setUser] = React.useState<relevantUserFields>(null)
+  const [message, setMessage] = React.useState('')
   // In a real project I would create a type to encapsulate the specific fields and restricted Action values
   //  I expect. This is out of scope.
   const [approveHistory, setApproveHistory] = React.useState<Array<any>>([])
 
-  const resetUser = () => setUser(null)
+  const resetUser = () => {
+    setMessage('')
+    setUser(null)
+  }
 
   // Pull a candidate on first render and pull a new one if user becomes null
   React.useEffect(() => {
@@ -37,7 +41,7 @@ function App() {
 
   // Add a new entry to history, persist to storage, and reset user to force a new one to be pulled
   const handleCandidate = (action: 'Approve' | 'Reject') => () => {
-    const newEntry = {message: '', user, action}
+    const newEntry = {message, user, action}
     const newApproveHistory = approveHistory
       ? approveHistory.concat(newEntry)
       : [newEntry]
@@ -119,7 +123,8 @@ function App() {
               <Grid item xs={1}>Cell:</Grid>
               <Grid item xs={3}>{user.cell}</Grid>
               <Grid item xs={1}>Comments:</Grid>
-              <Grid item xs={3} sm={7}><TextField multiline className="App-comments-field" /></Grid>
+              <Grid item xs={3} sm={7}><TextField onChange={(event) => setMessage(event.target.value)}
+                multiline className="App-comments-field" /></Grid>
               <Grid item xs={4} sm={8}><Divider /></Grid>
               <Grid item xs={1}>
                 <Button variant='outlined' sx={{
