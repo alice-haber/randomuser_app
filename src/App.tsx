@@ -3,7 +3,7 @@ import './App.css';
 import { getUser, relevantUserFields } from './getRandomUserAPI';
 import Grid from '@mui/material/Grid'
 import { Box, Button, Divider, TextField, Typography } from '@mui/material';
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import { DataGrid, GridColDef, GridRowId } from '@mui/x-data-grid';
 
 // Colors I liked from the OnSiteIQ homepage styles
 const onSiteIQWhite = '#fff'
@@ -48,6 +48,10 @@ function App() {
     resetUser()
   }
 
+  const removeHistoricalRecord = (id: GridRowId) => () =>
+    setApproveHistory(approveHistory.splice((typeof id === 'string'
+      ? parseInt(id)
+      : id, 1)))
   const historyCols: GridColDef[] = [
     {
       field: 'undo',
@@ -55,7 +59,7 @@ function App() {
       width: 100,
       editable: false,
       renderCell: (params) => (
-        <Button variant='contained' sx={{
+        <Button variant='contained' onClick={removeHistoricalRecord(params.id)} sx={{
           color: onSiteIQWhite,
           backgroundColor: onSiteIQPurple,
           ":hover": {
