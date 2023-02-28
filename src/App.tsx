@@ -52,10 +52,12 @@ function App() {
     resetUser()
   }
 
-  const removeHistoricalRecord = (id: GridRowId) => () =>
-    setApproveHistory(approveHistory.splice((typeof id === 'string'
-      ? parseInt(id)
-      : id, 1)))
+  const removeHistoricalRecord = (id: number) => () => {
+    const newApproveHistory = approveHistory.filter((_, i) => i !== id)
+
+    setApproveHistory(newApproveHistory)
+    localStorage.setItem('approveHistory', JSON.stringify(newApproveHistory))
+  }
   const historyCols: GridColDef[] = [
     {
       field: 'undo',
@@ -63,7 +65,7 @@ function App() {
       width: 100,
       editable: false,
       renderCell: (params) => (
-        <Button variant='contained' onClick={removeHistoricalRecord(params.id)} sx={{
+        <Button variant='contained' onClick={removeHistoricalRecord(params.row.id)} sx={{
           color: onSiteIQWhite,
           backgroundColor: onSiteIQPurple,
           ":hover": {
