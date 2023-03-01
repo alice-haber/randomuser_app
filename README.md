@@ -22,8 +22,12 @@ The random user API provides a large amount of personal information. Some is sen
     - both available phone #'s, for cases where a user provides one but not both
     - a photo so that the hiring manager can recognize the person (this should be run by HR, as it can support discriminatory hiring practices, but it seemed as though it would be a very likely ask for such an application)
 
-Typically, FE best practices would dictate that some accessibility features be made available. I am not very experienced in working with aria-labels and the like, but it's an area where I'd like to get more experience. I timeboxed my effort for this takehome assignment and determined that accessibility support was just outside of my timebox.
+Typically, FE best practices would dictate that some accessibility features be made available. I am not very experienced in working with aria-labels and the like, but it's an area where I'd like to get more experience. I timeboxed my effort for this takehome assignment and determined that advanced accessibility support was just outside of my timebox.
 
 Emotion is included by default with Material UI for styling and I saw no compelling reason to change that.
 
 When executing the "Undo" action on historical candidate action, I felt it made sense to populate the form with that candidate's information again so that the hiring manager can make a new decision on the candidate, write a new comment, etc. I determined this was out of timebox scope, but this is the direction I'd likely suggest to Product if I were working on this software in the real world.
+
+I chose to leave a lot of the create-react-app boilerplate alone because the stated scope (2-4 hours) of this project does not allow for perfect polishing and removing all unnecessary boilerplate code and resources.
+
+I assumed that it would be alright for a toy project to have the candidate and review pages exist on one "page", but in a production app I'd recommend the Candidate History be located in a modal or even its own routed page. This would require shuffling React state around a bit, and may benefit more advanced state tooling like React Contexts or Redux.
