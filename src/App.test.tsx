@@ -121,5 +121,64 @@ test('user can leave comments and reject', async () => {
     expect(gridCells[2]).toHaveTextContent('Reject')
     expect(gridCells[3]).toHaveTextContent('Jeannine was not a good fit.')
   })
+})
 
+test('user can undo past candidate action', async () => {
+  fetchMock.mockResponse(JSON.stringify(randomUserTwo))
+  let dom: RenderResult
+
+  await act(() => {
+    dom = render(<App />)
+  })
+
+  await waitFor(() => {
+    const candidateFullNameElement = getById(dom.container, 'candidateFullName')
+    expect(candidateFullNameElement).toBeInTheDocument()
+  })
+
+  fetchMock.mockResponse(JSON.stringify(randomUserOne))
+
+  await act(() => {
+    typeMessage(dom, 'Jeannine was not a good fit.')
+    rejectClick(dom)
+  })
+
+  await waitFor(async () => {
+    const candidateMessageInputElement = getById(dom.container, 'candidateMessageInput')!
+    expect (candidateMessageInputElement).toHaveTextContent('')
+  })
+
+  await act(() => {
+    typeMessage(dom, 'Rostislava is a sure thing.')
+    approveClick(dom)
+  })
+
+  await waitFor(async () => {
+    const candidateMessageInputElement = getById(dom.container, 'candidateMessageInput')!
+    expect (candidateMessageInputElement).toHaveTextContent('')
+
+     //Cells should be populated with the right info
+     const gridCells = await findAllByRole(dom.container, "cell");
+     //2 rows with the ordering and content we expect
+     expect(gridCells.length).toEqual(8)
+     expect(gridCells[3]).toHaveTextContent('Jeannine was not a good fit.')
+     expect(gridCells[7]).toHaveTextContent('Rostislava is a sure thing.')
+  })
+
+  //Click undo on Jeannine's rejection row
+  await act(() => {
+    clickButton('candidate-0-undo-btn')(dom)
+  })
+
+  //Verify the rejection row is now gone
+  await waitFor(async () => {
+    const candidateMessageInputElement = getById(dom.container, 'candidateMessageInput')!
+    expect (candidateMessageInputElement).toHaveTextContent('')
+
+     //Cells should be populated with the right info
+     const gridCells = await findAllByRole(dom.container, "cell");
+     //2 rows with the ordering and content we expect
+     expect(gridCells.length).toEqual(4)
+     expect(gridCells[3]).toHaveTextContent('Rostislava is a sure thing.')
+  })
 })
