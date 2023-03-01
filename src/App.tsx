@@ -69,13 +69,15 @@ function App() {
       width: 100,
       editable: false,
       renderCell: (params) => (
-        <Button variant='contained' onClick={removeHistoricalRecord(params.row.id)} sx={{
-          color: onSiteIQWhite,
-          backgroundColor: onSiteIQPurple,
-          ":hover": {
-            backgroundColor: onSiteIQCharcoal
-          }
-        }}>Undo</Button>
+        <Button variant='contained' onClick={removeHistoricalRecord(params.row.id)}
+          id={`candidate-${params.row.id}-undo-btn`}
+          sx={{
+            color: onSiteIQWhite,
+            backgroundColor: onSiteIQPurple,
+            ":hover": {
+              backgroundColor: onSiteIQCharcoal
+            }
+          }}>Undo</Button>
       )
     },
     {
