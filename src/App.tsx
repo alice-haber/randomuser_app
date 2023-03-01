@@ -1,9 +1,9 @@
-import React from 'react';
-import './App.css';
-import { getUser, relevantUserFields } from './getRandomUserAPI';
+import React from 'react'
+import './App.css'
+import { getUser, relevantUserFields } from './getRandomUserAPI'
 import Grid from '@mui/material/Grid'
-import { Box, Button, Divider, TextField, Typography } from '@mui/material';
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import { Box, Button, Divider, TextField, Typography } from '@mui/material'
+import { DataGrid, GridColDef } from '@mui/x-data-grid'
 
 // Colors I liked from the OnSiteIQ homepage styles
 const onSiteIQWhite = '#fff'
@@ -27,7 +27,11 @@ function App() {
   React.useEffect(() => {
     if (!user) {
       getUser()
-        .then(setUser)}}, [user])
+        .then(setUser)
+        .catch((e) => {
+          // Here I'd want to log in a way that the error gets pushed to alerting/monitoring systems
+          console.error(e)
+        })}}, [user])
 
   // Pull from localStorage and parse on first render
   React.useEffect(() => {
@@ -168,4 +172,4 @@ function App() {
   );
 }
 
-export default App;
+export default App
