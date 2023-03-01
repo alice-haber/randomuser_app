@@ -126,20 +126,20 @@ function App() {
               <Grid item xs={3} id={'candidatePostcode'}>
                 {user.postcode}</Grid>
               <Grid item xs={1}>Email:</Grid>
-              <Grid item xs={3} id={'candidateEmail'}>
+              <Grid item xs={3} id='candidateEmail'>
                 {user.email}</Grid>
               <Grid item xs={1}>Phone:</Grid>
-              <Grid item xs={3} id={'candidatePhone'}>
+              <Grid item xs={3} id='candidatePhone'>
                 {user.phone}</Grid>
               <Grid item xs={1}>Cell:</Grid>
-              <Grid item xs={3} id={'candidateCell'}>
+              <Grid item xs={3} id='candidateCell'>
                 {user.cell}</Grid>
               <Grid item xs={1}>Comments:</Grid>
               <Grid item xs={3} sm={7}><TextField onChange={(event) => setMessage(event.target.value)}
-                multiline className="App-comments-field" /></Grid>
+                multiline className="App-comments-field" id='candidateMessageInput' /></Grid>
               <Grid item xs={4} sm={8}><Divider /></Grid>
               <Grid item xs={1}>
-                <Button variant='outlined' sx={{
+                <Button variant='outlined' id='rejectButton' sx={{
                   backgroundColor: onSiteIQWhite,
                   color: onSiteIQPurple,
                   borderColor: onSiteIQPurple,
@@ -150,7 +150,7 @@ function App() {
                 }} onClick={handleCandidate('Reject')}>Reject</Button>
               </Grid>
               <Grid item xs={3}>
-                <Button variant='contained' sx={{
+                <Button variant='contained' id='approveButton' sx={{
                   color: onSiteIQWhite,
                   backgroundColor: onSiteIQPurple,
                   ":hover": {
@@ -170,6 +170,7 @@ function App() {
                 rowsPerPageOptions={[5]}
                 disableSelectionOnClick
                 experimentalFeatures={{ newEditingApi: true }}
+                columnBuffer={4}
               />
             </Box>
           </form>
