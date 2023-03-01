@@ -1,5 +1,5 @@
 import React from 'react'
-import { getByText, render, screen, waitFor } from '@testing-library/react'
+import { getByText, queryByAttribute, render, RenderResult, screen, waitFor } from '@testing-library/react'
 import App from './App'
 import fetchMock from "jest-fetch-mock"
 
@@ -7,6 +7,7 @@ import randomUserOne from './testData/randomUserOne.json'
 import { act } from 'react-dom/test-utils'
 
 fetchMock.enableMocks();
+const getById = queryByAttribute.bind(null, 'id');
 
 // Ensures each test will have a clean historical slate, meaning they do not run in any particular order
 beforeEach(() => {
@@ -14,7 +15,7 @@ beforeEach(() => {
   fetchMock.resetMocks()
 })
 
-test('renders basic Candidate Review app header and loading screen', () => {
+test('renders basic Candidate Review app header and loading screen when API not available', () => {
   render(<App />)
 
   const candidateHeaderElement = screen.getByText(/Candidate Review Page/i)
@@ -26,16 +27,38 @@ test('renders basic Candidate Review app header and loading screen', () => {
 });
 
 test('candidate info is displayed, user can leave comments and approve', async () => {
-  console.log(randomUserOne)
   fetchMock.mockResponse(JSON.stringify(randomUserOne))
+  let dom: RenderResult
 
   await act(() => {
-    render(<App />)
+    dom = render(<App />)
   })
 
   await waitFor(() => {
     const candidateHeaderElement = screen.getByText(/Candidate Review Page/i)
     expect(candidateHeaderElement).toBeInTheDocument()
+
+    const candidateFullNameElement = getById(dom.container, 'candidateFullName')
+    const candidateCountryElement = getById(dom.container, 'candidateCountry')
+    const candidatePostcodeElement = getById(dom.container, 'candidatePostcode')
+    const candidateEmailElement = getById(dom.container, 'candidateEmail')
+    const candidatPhoneElement = getById(dom.container, 'candidatePhone')
+    const candidatCellElement = getById(dom.container, 'candidateCell')
+
+    expect(candidateFullNameElement).toHaveTextContent('Erstenyuk, Rostislava')
+    expect(candidateCountryElement).toHaveTextContent('Ukraine')
+    expect(candidatePostcodeElement).toHaveTextContent('17916')
+    expect(candidateEmailElement).toHaveTextContent('rostislava.erstenyuk@example.com')
+    expect(candidatPhoneElement).toHaveTextContent('(098) T86-4161')
+    expect(candidatCellElement).toHaveTextContent('(096) S94-6027')
+  })
+
+  await act(() => {
+
+  })
+
+  await waitFor(() => {
+    
   })
 
 })

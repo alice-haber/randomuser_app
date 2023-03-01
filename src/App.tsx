@@ -117,17 +117,23 @@ function App() {
             <Grid container spacing={{ xs: 0, md: 0 }} columns={{ xs: 4, sm: 8, md: 8 }}>
               {/*There is an opportunity here to abstract over these xs/sm/md grid item sizes with custom components, out of scope*/}
               <Grid item xs={1}>Name:</Grid>
-              <Grid item xs={3}>{`${user.last_name}, ${user.first_name}`}</Grid>
+              <Grid item xs={3} id={'candidateFullName'}>
+                {`${user.last_name}, ${user.first_name}`}</Grid>
               <Grid item xs={1}>Country:</Grid>
-              <Grid item xs={3}>{user.country}</Grid>
+              <Grid item xs={3} id={'candidateCountry'}>
+                {user.country}</Grid>
               <Grid item xs={1}>Postcode:</Grid>
-              <Grid item xs={3}>{user.postcode}</Grid>
+              <Grid item xs={3} id={'candidatePostcode'}>
+                {user.postcode}</Grid>
               <Grid item xs={1}>Email:</Grid>
-              <Grid item xs={3}>{user.email}</Grid>
+              <Grid item xs={3} id={'candidateEmail'}>
+                {user.email}</Grid>
               <Grid item xs={1}>Phone:</Grid>
-              <Grid item xs={3}>{user.phone}</Grid>
+              <Grid item xs={3} id={'candidatePhone'}>
+                {user.phone}</Grid>
               <Grid item xs={1}>Cell:</Grid>
-              <Grid item xs={3}>{user.cell}</Grid>
+              <Grid item xs={3} id={'candidateCell'}>
+                {user.cell}</Grid>
               <Grid item xs={1}>Comments:</Grid>
               <Grid item xs={3} sm={7}><TextField onChange={(event) => setMessage(event.target.value)}
                 multiline className="App-comments-field" /></Grid>
