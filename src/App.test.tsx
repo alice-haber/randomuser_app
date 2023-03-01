@@ -23,7 +23,7 @@ const clickButton = (buttonId: string) => (dom: RenderResult) => {
 const approveClick = clickButton('approveButton')
 const rejectClick = clickButton('rejectButton')
 
-// Ensures each test will have a clean historical slate, meaning they do not run in any particular order
+// Ensures each test will have a clean slate, meaning they do not need to run in any particular order
 beforeEach(() => {
   window.localStorage.clear()
   fetchMock.resetMocks()
