@@ -3,7 +3,7 @@ import './App.css';
 import { getUser, relevantUserFields } from './getRandomUserAPI';
 import Grid from '@mui/material/Grid'
 import { Box, Button, Divider, TextField, Typography } from '@mui/material';
-import { DataGrid, GridColDef, GridRowId } from '@mui/x-data-grid';
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
 
 // Colors I liked from the OnSiteIQ homepage styles
 const onSiteIQWhite = '#fff'
