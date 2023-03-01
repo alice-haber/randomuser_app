@@ -1,6 +1,17 @@
+# My Dev Environment/Dependencies
+I developed and tested this using:
+    node v19.7.0
+    npm 9.5.0 (installed using npx)
+
 # How to run
+To install dependencies, run `npm i` in the root project directory.
 
+To run tests, run `npm run test` in the root project directory.
 
+To run a development build (will render twice on page load due to default dev env React Strict Mode rules),
+    run `npm start`
+
+To build a production build (static html with assets and js files) run `npm run build`
 
 # Assumptions/scope limitations
 The random user API provides a large amount of personal information. Some is sensitive or PII, like exact addresses, login info, and what appears to be a close analogue of SSN. It seemed obvious to me that we do not want to be exposing information like this to hiring managers, so I chose a reasonable subset of information for the manager to make a decision:
