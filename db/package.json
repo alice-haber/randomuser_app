@@ -1,0 +1,15 @@
+{
+  "name": "@arenadotio/entity-resolution-db",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "migrate": "flyway -c conf/flyway.js migrate",
+    "start": "./local_db.sh && yarn run migrate",
+    "build": "echo \"no build\"",
+    "test": "echo \"no test\"",
+    "deploy": "echo \"TODO: do we want this to be a migrate?\""
+  },
+  "dependencies": {
+    "node-flywaydb": "^3.0.7"
+  }
+}
